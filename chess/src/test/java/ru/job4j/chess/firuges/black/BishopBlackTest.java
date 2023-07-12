@@ -1,9 +1,12 @@
 package ru.job4j.chess.firuges.black;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,19 +33,19 @@ class BishopBlackTest {
         BishopBlack test = new BishopBlack(Cell.C1);
         Cell[] testArray = test.way(Cell.G5);
         Cell[] expectedArray = {Cell.D2, Cell.E3, Cell.F4, Cell.G5 };
-        for (int i = 0; i < testArray.length; i++) {
-            assertEquals(expectedArray[i], testArray[i]);
+        boolean isEqual = Arrays.equals(expectedArray, testArray);
+        assertTrue(isEqual);
         }
-    }
 
     @Test
-    public void testWay2() throws ImpossibleMoveException {
+    public void testWay2() {
         BishopBlack test = new BishopBlack(Cell.C1);
-        try {
-            test.way(Cell.G4);
-            fail("Expected ImpossibleMoveException");
-        } catch (ImpossibleMoveException thrown) {
-            assertNotEquals("", thrown.getMessage());
-        }
+        ImpossibleMoveException exception = assertThrows(
+                ImpossibleMoveException.class,
+                () -> {
+                    test.way(Cell.G4);
+                }
+        );
+        assertThat(exception.getMessage()).isEqualTo("Could not move by diagonal from C1 to G4");
     }
 }
