@@ -8,7 +8,6 @@ import ru.job4j.chess.firuges.Figure;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 class BishopBlackTest {
 
     @Test
@@ -17,7 +16,6 @@ class BishopBlackTest {
         Cell expected = Cell.A3;
         assertThat(test.position()).isEqualTo(expected);
     }
-
 
     @Test
     public void copy() {
@@ -28,7 +26,7 @@ class BishopBlackTest {
     }
 
     @Test
-    public void testWay(){
+    public void testWay() {
         BishopBlack test = new BishopBlack(Cell.C1);
         Cell[] testArray = test.way(Cell.G5);
         Cell[] expectedArray = {Cell.D2, Cell.E3, Cell.F4, Cell.G5 };
@@ -38,12 +36,12 @@ class BishopBlackTest {
     }
 
     @Test
-    public void testWay2() throws ImpossibleMoveException{
+    public void testWay2() throws ImpossibleMoveException {
         BishopBlack test = new BishopBlack(Cell.C1);
         try {
             test.way(Cell.G4);
             fail("Expected ImpossibleMoveException");
-        } catch (ImpossibleMoveException thrown){
+        } catch (ImpossibleMoveException thrown) {
             assertNotEquals("", thrown.getMessage());
         }
     }
